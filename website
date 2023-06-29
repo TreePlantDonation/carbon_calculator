@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* CSS Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #9AC0DB;
+        background-size: cover;
+        color: white; /* Set text color to white */
+      }
+      
+      header {
+        background-image: url("https://miro.medium.com/max/6054/0*kp8rJzqHjagMj22J");
+        background-size: cover;
+        background-position: center;
+        color: #fff;
+        padding: 20px;
+        padding-bottom: 300px;
+        text-align: center;
+        height: 120%; /* Increased height by 20% */
+        box-sizing: border-box; /* Ensure padding is included in the height */
+        
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.12), 0 14px 4px 0 rgba(0, 0, 0, 0.12);
+      }
+      
+      main {
+        padding: 10px;
+      }
+      
+      p {
+        color: white; /* Set text color to white */
+      }
+      
+      .input-label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      
+      .input-field {
+        padding: 5px;
+        width: 200px;
+      }
+      
+      .btn {
+        display: inline-block;
+        background-color: #6285A3;
+        border-color: #6285A3;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      
+      .btn:hover {
+        background-color: #fff;
+        color: black;
+      }
+      
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+
+      /* Additional CSS for the image */
+      .image-container {
+        padding-top: 2px;
+        text-align: center;
+        box-sizing: border-box; /* Ensure padding is included in the width */
+        width: 30%;
+      }
+      
+      .rounded-image {
+        border-radius: 10px;
+        max-width: 100%; /* Set the maximum width to 100% */
+        width: 200px; /* Set width to auto to maintain aspect ratio */
+      }
+      
+      /* Additional CSS for the flexbox */
+      .flex-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding-top: 3%;
+        padding-right: 5%;
+        padding-left: 10%;
+      }
+      .flex-item {
+        flex-grow: 3;
+        max-width: 50% ;
+
+      }
+
+      .flex-item-2 {
+        flex-grow: 1;
+        padding-left: 4%;
+      }
+  
+      .footer_container{
+        text-align: center;
+        color: white;
+        padding-top: 3%;
+        padding-left: 30%;
+        padding-right: 30%;
+        padding-bottom: 2%;
+      }
+      
+      /* Media Query */
+      @media (max-width: 1200px) {
+        .flex-container {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .flex-item,
+        .flex-item-2 {
+          padding-left: 0;
+        }
+        
+        .flex-item:first-child {
+          flex-basis: 100%;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <header>
+    
+    </header>
+    
+    <main>
+      <div class="flex-container">
+        <div class="flex-item">
+          <h1 style="font-weight: bolder;">Our Mission to Reduce Emissions</h1>
+          <p>We are the Gallagher Intern Class at 181 University Ave in Toronto! We are a passionate group of individuals who understand the significance of air travel, especially within the insurance industry. However, we also recognize the alarming levels of carbon emissions associated with this mode of transportation, which directly contribute to the destruction of our environment.</p>
+          <p>To address this issue, we have developed a Carbon Calculator app. With just a few simple steps, you can determine the amount of CO2 you have emitted through air travel in the past year and the number of trees required to offset it.</p>
+          <p style="font-weight: 500;">For every tree equivalent, we receive in donations, we will plant the corresponding number of trees. Together, we can actively contribute to reforestation efforts and combat climate change.</p>
+        </div>
+        
+        <div class="flex-item-2">
+          <label><h2>Calculate Emissions</h2></label>
+        
+          <label class="input-label" for="numFlights">Number of Flights Taken:</label>
+          <input class="input-field" type="number" id="numFlights" min="1" required>
+        
+          <button class="btn" onclick="calculateEmissions()">Calculate</button>
+        
+          <p id="result"></p>
+        
+      </div>
+      
+      <script>
+        // JavaScript code
+        function calculateEmissions() {
+          var numFlights = document.getElementById("numFlights").value;
+          var averageFlightLength = 807.89; // in kilometers
+          var averageEmissionsPerKm = 255; // in grams
+          
+          var emissions = (averageFlightLength * numFlights * averageEmissionsPerKm) / 1000; // convert grams to kilograms
+          
+          var treesNeeded = emissions / 500; // emissions sequestered by a 10-year-old tree
+          
+          document.getElementById("result").textContent = "Total Carbon Emissions: " + emissions.toFixed(2) + " kg" ;
+          document.getElementById("result").innerHTML += "<br>Trees Needed: " + Math.ceil(treesNeeded);
+         
+          // Adding the "Donate Here!" button with icon
+          var donateButton = document.createElement("button");
+          donateButton.className = "btn"; // Apply the button styling
+          donateButton.onclick = function () {
+            window.location.href = "https://www.eventbrite.ca/e/our-mission-to-reduce-emissions-tickets-652961022997";
+          };
+          donateButton.style.marginTop = "10px"; // Add margin to separate from the text
+          donateButton.innerHTML = '<img src="http://clipart-library.com/images_k/tree-icon-transparent/tree-icon-transparent-6.png" style="vertical-align: bottom; height: 35px; width: auto; margin-right: 5px;">Donate Here!';
+          document.getElementById("result").appendChild(document.createElement("br")); // Add a line break
+          document.getElementById("result").appendChild(document.createElement("br")); // Add another line break
+          document.getElementById("result").appendChild(donateButton);
+        }
+      </script>
+    </main>
+    <footer>
+      <!-- Calculation and Sources -->
+      <div class="footer_container">
+        <p style="font-style: italic; font-size: 10px; color: white; width: 100%;padding-bottom: 15px;">
+          Calculation: 
+          [ (Average Domestic Flight Length) * (Average kg of Carbon Emissions Emissions Per Domestic Flight km) ] / [Average emissions collected from a tree over its lifetime] = [(807.89)*(.255)] / [500]<br>
+          <br>
+          The average domestic flight length in the US is 807.89 km (BTS, 2018) and the average emissions per km of domestic flight is 255g per km (Our World In Data, 2018). The average Carbon captured from a tree over a lifetime can vary but often averages out at 500kg over it's lifetime (Statista, 2020).<br>
+          <br>
+          Sources:
+          Statista Research Department. “U.S. Regional Airlines - Average Passenger Trip Length 2006-2020.” Statista, 23 Mar. 2020, www.statista.com/statistics/742763/regional-carriers-average-passenger-trip-length/. 
+          <br>
+          Our World In Data. (2018). Carbon footprint of travel per kilometer. Our World in Data. https://ourworldindata.org/grapher/carbon-footprint-travel-mode
+          <br>
+          EcoTree. “Plant Trees and Help Us Take on Climate Change.” (2023).EcoTree. ecotree.green/en/. 
+        </p>
+        <img class="rounded-image" src="https://www.midlandsaerospace.org.uk/images/gallagher-logo-jan21.jpg" alt="Gallagher Logo">
+      </div>
+    </footer>
+  
+  </body>
+</html>
